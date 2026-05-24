@@ -63,7 +63,6 @@ body{font-family:var(--ff);background:var(--bg);color:var(--white);cursor:none;u
 
 /* S2 UNIVERSE */
 #s2{flex-direction:column;align-items:center;justify-content:center}
-#uni-canvas{position:absolute;inset:0;z-index:0;pointer-events:none}
 #s2-content{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center}
 .scale-row{display:flex;align-items:center;gap:56px;justify-content:center;margin-bottom:8px}
 .scale-item{text-align:center;opacity:0;transform:scale(.88);transition:opacity .7s ease,transform .7s ease}
@@ -375,7 +374,6 @@ body{font-family:var(--ff);background:var(--bg);color:var(--white);cursor:none;u
 
 <!-- S2 -->
 <div class="scene" id="s2">
-  <canvas id="uni-canvas"></canvas>
   <div id="s2-content">
     <div class="eyebrow fu" id="s2-ey" style="justify-content:center;margin-bottom:20px;">The Scale of What We Do</div>
     <div class="scale-row">
@@ -708,7 +706,6 @@ body{font-family:var(--ff);background:var(--bg);color:var(--white);cursor:none;u
 
 <!-- S2 -->
 <div class="scene" id="s2">
-  <canvas id="uni-canvas"></canvas>
   <div id="s2-content">
     <div class="eyebrow fu" id="s2-ey" style="justify-content:center;margin-bottom:20px;">The Scale of What We Do</div>
     <div class="scale-row">
@@ -1003,10 +1000,24 @@ document.addEventListener('mousemove',e=>{C1.style.left=e.clientX+'px';C1.style.
 const pc=document.getElementById('particles'),px=pc.getContext('2d');
 let pars=[],pf=0;
 function resizeP(){pc.width=innerWidth;pc.height=innerHeight}resizeP();window.addEventListener('resize',resizeP);
-function initP(){pars=[];for(let i=0;i<260;i++){const l=Math.floor(Math.random()*3);pars.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:[.22,.55,1.2][l]+Math.random()*.4,base:[.04,.13,.36][l]+Math.random()*.03,spd:[.0005,.002,.006][l]+Math.random()*.001,ph:Math.random()*Math.PI*2,dx:([.009,.035,.12][l]+Math.random()*.02)*(Math.random()>.5?1:-1),dy:([.003,.009,.028][l]+Math.random()*.01)*(Math.random()>.5?1:-1),l})}}
+function initP(){pars=[];for(let i=0;i<260;i++){const l=Math.floor(Math.random()*3);pars.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:[.22,.55,1.2][l]+Math.random()*.4,base:[.04,.13,.36][l]+Math.random()*.03,spd:[.0005,.002,.006][l]+Math.random()*.001,ph:Math.random()*Math.PI*2,dx:([.01,.0385,.132][l]+Math.random()*.022)*(Math.random()>.5?1:-1),dy:([.0033,.0099,.0308][l]+Math.random()*.011)*(Math.random()>.5?1:-1),l,rgb:null})}
+  // Add brand-colored dots — full universe field
+  const brandC=[[8,134,151],[0,104,172],[240,118,35],[184,43,30],[230,188,74]];
+  for(let i=0;i<380;i++){const br=brandC[i%5];const cx=innerWidth/2,cy=innerHeight/2;const angle=Math.random()*Math.PI*2;const dist=50+Math.random()*Math.min(innerWidth,innerHeight)*.52;pars.push({x:cx+Math.cos(angle)*dist,y:cy+Math.sin(angle)*dist,r:.6+Math.random()*2.5,base:.15+Math.random()*.50,spd:.002+Math.random()*.004,ph:Math.random()*Math.PI*2,dx:(Math.random()-.5)*.088,dy:(Math.random()-.5)*.055,l:1,rgb:br})}}
 initP();
 let sh=[];
-function animP(){pf++;px.clearRect(0,0,pc.width,pc.height);pars.forEach(p=>{const t=pf*p.spd+p.ph,op=p.base+Math.sin(t)*p.base*.85;const c=p.l===2?`rgba(238,232,218,${Math.max(0,op)})`:p.l===1?`rgba(220,234,244,${Math.max(0,op)})`:`rgba(170,200,235,${Math.max(0,op)})`;px.beginPath();px.arc(p.x,p.y,p.r,0,Math.PI*2);px.fillStyle=c;px.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<-5)p.x=pc.width+5;if(p.x>pc.width+5)p.x=-5;if(p.y<-5)p.y=pc.height+5;if(p.y>pc.height+5)p.y=-5});if(pf%400===0&&sh.length<2)sh.push({x:Math.random()*pc.width*.5,y:Math.random()*pc.height*.4,len:90+Math.random()*100,spd:9+Math.random()*6,op:1,a:Math.PI/6+(Math.random()-.5)*.25});sh=sh.filter(s=>s.op>.02);sh.forEach(s=>{const ex=s.x+Math.cos(s.a)*s.len,ey=s.y+Math.sin(s.a)*s.len;const g=px.createLinearGradient(s.x,s.y,ex,ey);g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(.5,`rgba(220,234,244,${s.op*.5})`);g.addColorStop(1,`rgba(230,188,74,${s.op})`);px.beginPath();px.moveTo(s.x,s.y);px.lineTo(ex,ey);px.strokeStyle=g;px.lineWidth=1.2;px.stroke();s.x+=Math.cos(s.a)*s.spd;s.y+=Math.sin(s.a)*s.spd;s.op-=.018});requestAnimationFrame(animP)}
+// Random pulse system
+let pulseList=[];
+function triggerPulses(){
+  const count=1+Math.floor(Math.random()*3);
+  for(let i=0;i<count;i++){
+    const idx=Math.floor(Math.random()*pars.length);
+    pulseList.push({idx,start:pf,dur:160+Math.random()*200});
+  }
+  setTimeout(triggerPulses,4000+Math.random()*5000);
+}
+setTimeout(triggerPulses,2000);
+function animP(){pf++;px.clearRect(0,0,pc.width,pc.height);pars.forEach(p=>{const t=pf*p.spd+p.ph,op=p.base+Math.sin(t)*p.base*.85;let c;if(p.rgb){const[R,G,B]=p.rgb;c=`rgba(${R},${G},${B},${Math.max(0,op)})`}else{c=p.l===2?`rgba(238,232,218,${Math.max(0,op)})`:p.l===1?`rgba(220,234,244,${Math.max(0,op)})`:`rgba(170,200,235,${Math.max(0,op)})`}const pi=pars.indexOf(p);const pulse=pulseList.find(pl=>pl.idx===pi);px.beginPath();px.arc(p.x,p.y,p.r,0,Math.PI*2);px.fillStyle=c;px.fill();if(pulse){const prog=(pf-pulse.start)/pulse.dur;if(prog<=1){const ease=Math.sin(prog*Math.PI);const ga=ease*.35;px.beginPath();px.arc(p.x,p.y,p.r*1.2,0,Math.PI*2);px.fillStyle='rgba(255,255,255,'+ga+')';px.fill()}else{pulseList=pulseList.filter(pl=>pl!==pulse)}};p.x+=p.dx;p.y+=p.dy;if(p.x<-5)p.x=pc.width+5;if(p.x>pc.width+5)p.x=-5;if(p.y<-5)p.y=pc.height+5;if(p.y>pc.height+5)p.y=-5});if(pf%400===0&&sh.length<2)sh.push({x:Math.random()*pc.width*.5,y:Math.random()*pc.height*.4,len:90+Math.random()*100,spd:9+Math.random()*6,op:1,a:Math.PI/6+(Math.random()-.5)*.25});sh=sh.filter(s=>s.op>.02);sh.forEach(s=>{const ex=s.x+Math.cos(s.a)*s.len,ey=s.y+Math.sin(s.a)*s.len;const g=px.createLinearGradient(s.x,s.y,ex,ey);g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(.5,`rgba(220,234,244,${s.op*.5})`);g.addColorStop(1,`rgba(230,188,74,${s.op})`);px.beginPath();px.moveTo(s.x,s.y);px.lineTo(ex,ey);px.strokeStyle=g;px.lineWidth=1.2;px.stroke();s.x+=Math.cos(s.a)*s.spd;s.y+=Math.sin(s.a)*s.spd;s.op-=.018});requestAnimationFrame(animP)}
 animP();
 
 // NAV
@@ -1115,12 +1126,7 @@ function startTLPulse(){
 
 // S2
 function initS2(){
-  const canvas=document.getElementById('uni-canvas');canvas.width=innerWidth;canvas.height=innerHeight;
-  const ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height;
-  const BC=[[8,134,151],[0,104,172],[240,118,35],[184,43,30],[230,188,74]];
-  const dots=[];for(let i=0;i<380;i++){const br=BC[i%5],a=Math.random()*Math.PI*2,d=60+Math.random()*Math.min(W,H)*.5;dots.push({x:W/2+Math.cos(a)*d,y:H/2+Math.sin(a)*d,r:.6+Math.random()*2.4,color:br,op:0,tgt:.15+Math.random()*.65,delay:Math.random()*2200,pulse:Math.random()*Math.PI*2,spd:.002+Math.random()*.004})}
-  let st=null;function drawU(ts){if(!st)st=ts;const el=ts-st;ctx.clearRect(0,0,W,H);dots.forEach(d=>{if(el>d.delay)d.op=Math.min(d.op+.007,d.tgt);const p=d.op*(0.65+0.35*Math.sin(ts*d.spd+d.pulse));const[R,G,B]=d.color;ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fillStyle=`rgba(${R},${G},${B},${p})`;ctx.fill()});requestAnimationFrame(drawU)}
-  requestAnimationFrame(drawU);
+  // Stats reveal only — background dots now in main particle system
   ['sc0','sc1','sc2'].forEach((id,i)=>{const el=document.getElementById(id);if(el){el.classList.remove('in');setTimeout(()=>el.classList.add('in'),600+i*500)}});
   ['sv1','sv2'].forEach((id,i)=>{const el=document.getElementById(id);if(el)setTimeout(()=>el.classList.add('in'),900+i*500)});
   setTimeout(()=>document.getElementById('s2-sub').classList.add('in'),600+3*500+300);

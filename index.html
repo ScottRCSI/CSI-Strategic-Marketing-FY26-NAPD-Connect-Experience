@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+  BEHIND EVERY DEAL | CSI NSM 2026
+  Created by: Scott Reitzel, Director of Digital Strategy, Design & Brand
+  SR / CSI Digital - May 2026
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Behind Every Deal - CSI NSM 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+:root{--bg:#00080F;--navy:#00375D;--blue:#0068AC;--gold:#E6BC4A;--teal:#088697;
+  --white:#FFF;--off:rgba(220,234,244,.9);--muted:rgba(220,234,244,.70);
+  --faint:rgba(220,234,244,.32);--ff:'Libre Franklin',sans-serif}
+body{font-family:var(--ff);background:var(--bg);color:var(--white);cursor:none;user-select:none}
+#cur{position:fixed;width:7px;height:7px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+#cur2{position:fixed;width:28px;height:28px;border:1px solid rgba(230,188,74,.3);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .18s}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none}
+#vig{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 100% 100% at 50% 50%,transparent 50%,rgba(0,4,10,.8) 100%)}
+#wm{position:fixed;bottom:22px;left:52px;font-size:10px;font-weight:400;letter-spacing:.14em;color:rgba(230,188,74,.2);z-index:50;pointer-events:none}
+#nav{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:8px;align-items:center}
+.nd{width:5px;height:5px;border-radius:50%;background:rgba(220,234,244,.2);transition:all .4s;cursor:pointer}
+.nd.active{background:var(--gold);width:20px;border-radius:3px}
+.nd.done{background:rgba(230,188,74,.35)}
+#snum{position:fixed;bottom:28px;right:52px;font-size:11px;letter-spacing:.1em;color:var(--faint);z-index:50}
+#flash{position:fixed;inset:0;z-index:200;pointer-events:none;background:rgba(0,80,160,.07);opacity:0;transition:opacity .12s}
+#flash.pop{opacity:1}
+.scene{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .75s ease}
+.scene.active{opacity:1;pointer-events:all}
+.fu{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+.fu.in{opacity:1;transform:translateY(0)}
+.fu.d1{transition-delay:.15s}.fu.d2{transition-delay:.3s}.fu.d3{transition-delay:.45s}.fu.d4{transition-delay:.6s}
+.eyebrow{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);opacity:.95;display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--gold);flex-shrink:0}
+.gold-rule{width:56px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0 22px}
+
+/* S0 COLD OPEN */
+#s0{flex-direction:column;text-align:center}
+#s0-you{font-size:clamp(100px,14vw,180px);font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--white);opacity:0;transition:opacity 1.2s ease,transform 1.6s ease,filter 1.6s ease}
+#s0-you.in{opacity:1}
+#s0-you.bloom{opacity:0;transform:scale(1.22);filter:blur(8px)}
+#s0-lines{margin-top:16px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;transform:translateY(-15vh)}
+.s0-line{font-size:clamp(32px,4.8vw,68px);font-weight:700;color:rgba(220,234,244,.92);letter-spacing:-.025em;line-height:1.15;display:flex;flex-wrap:wrap;justify-content:center;gap:0 10px;min-height:1.3em;text-align:center}
+.hw{display:inline-block;opacity:0;transform:translateY(10px);transition:opacity .55s ease,transform .55s ease}
+.hw.in{opacity:1;transform:translateY(0)}
+
+/* S1 TIMELINE */
+#s1{flex-direction:column;align-items:center}
+#tl-outer{width:min(1060px,94vw);display:flex;flex-direction:column;align-items:center;gap:36px;padding:0 32px}
+#tl-svg{width:100%;overflow:visible}
+#tl-sent1,#tl-sent2{transition:color .6s ease,font-weight .6s ease,text-shadow .6s ease}
+#tl-sent1.dim{color:rgba(220,234,244,.3)}
+#tl-sent1.bright{color:#fff;font-weight:700;text-shadow:0 0 20px rgba(220,234,244,.15)}
+#tl-sent2.dim{color:rgba(220,234,244,.3)}
+#tl-sent2.bright{color:#fff;font-weight:700;text-shadow:0 0 20px rgba(230,188,74,.15)}
+#tl-copy{font-size:22px;color:rgba(220,234,244,.88);line-height:1.65;text-align:center;max-width:720px;opacity:0;transform:translateY(8px);transition:opacity .7s ease,transform .7s ease}
+#tl-copy.in{opacity:1;transform:translateY(0)}
+
+/* S2 UNIVERSE */
+#s2{flex-direction:column;align-items:center;justify-content:center}
+#uni-canvas{position:absolute;inset:0;z-index:0;pointer-events:none}
+#s2-content{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center}
+.scale-row{display:flex;align-items:center;gap:56px;justify-content:center;margin-bottom:8px}
+.scale-item{text-align:center;opacity:0;transform:scale(.88);transition:opacity .7s ease,transform .7s ease}
+.scale-item.in{opacity:1;transform:scale(1)}
+.sc-num{font-size:clamp(68px,10vw,128px);font-weight:800;letter-spacing:-.04em;line-height:.9;background:linear-gradient(135deg,#fff 30%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sc-label{font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.s2-vdiv{width:1px;height:80px;background:linear-gradient(180deg,transparent,rgba(230,188,74,.25),transparent);opacity:0;transition:opacity .5s ease}
+.s2-vdiv.in{opacity:1}
+#s2-sub{font-size:18px;font-weight:300;font-style:italic;color:rgba(220,234,244,.82);text-align:center;max-width:520px;margin-top:28px;opacity:0;transition:opacity 1s ease}
+#s2-sub.in{opacity:1}
+
+/* LIFECYCLE SCENES */
+.ls-scene{align-items:stretch}
+.ls-left{position:absolute;left:6%;top:0;bottom:0;width:40%;display:flex;flex-direction:column;justify-content:center;padding:0 48px}
+.ls-title{font-size:clamp(38px,5vw,62px);font-weight:700;letter-spacing:-.03em;line-height:.97;color:var(--white)}
+.ls-title .dim{color:rgba(220,234,244,.48);font-weight:200}
+.ls-body{font-size:14px;color:rgba(220,234,244,.78);line-height:1.7;margin-top:14px;max-width:360px}
+.tl-strip{display:flex;align-items:center;margin-top:28px;gap:0}
+.tl-nd{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(220,234,244,.38);transition:color .4s}
+.tl-nd.lit{color:var(--gold)}
+.tl-dot{width:7px;height:7px;border-radius:50%;background:rgba(220,234,244,.25);transition:background .4s,box-shadow .4s}
+.tl-nd.lit .tl-dot{background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.tl-conn{width:28px;height:1px;background:rgba(220,234,244,.08);margin-bottom:12px}
+.ls-right{position:absolute;right:2%;top:0;bottom:0;width:50%;display:flex;align-items:center;justify-content:center;padding:0}
+
+/* EDITORIAL CARDS */
+.ecards{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%}
+.ecard{background:linear-gradient(168deg,#ffffff 0%,#f8f7f5 100%);border-radius:6px;padding:26px 28px;position:relative;overflow:hidden;opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease,box-shadow .3s;box-shadow:0 1px 2px rgba(0,0,0,.06),0 8px 28px rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.05)}
+.ecard.in{opacity:1;transform:translateY(0)}
+.ecard:hover{box-shadow:0 1px 2px rgba(0,0,0,.06),0 18px 52px rgba(0,0,0,.16);transform:translateY(-2px)}
+.ecard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue)}
+.ecard.gold-bar::before{background:var(--gold)}
+.ecard.teal-bar::before{background:var(--teal)}
+.ecard.red-bar::before{background:#b82b1e}
+.ecard.orange-bar::before{background:#f07623}
+.ecard-eyebrow{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;padding-bottom:9px;border-bottom:1px solid rgba(0,0,0,.06)}
+.ecard.gold-bar .ecard-eyebrow{color:#b08a2a}
+.ecard.teal-bar .ecard-eyebrow{color:var(--teal)}
+.ecard.red-bar .ecard-eyebrow{color:#b03a3a}
+.ecard.orange-bar .ecard-eyebrow{color:#b06a20}
+.ecard-title{font-size:15px;font-weight:700;color:#001a33;margin-bottom:7px;line-height:1.3;letter-spacing:-.01em}
+.ecard-body{font-size:12.5px;color:#8a8480;line-height:1.6}
+.ecard-stat{font-size:28px;font-weight:800;letter-spacing:-.03em;margin-top:14px;padding-top:12px;border-top:1px solid rgba(0,0,0,.06);background:linear-gradient(135deg,var(--blue),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ecard.hero{grid-column:1/-1;background:linear-gradient(135deg,#002542 0%,#003d6b 100%);border-radius:8px;padding:22px 26px;box-shadow:0 0 0 1px rgba(230,188,74,.25),0 8px 40px rgba(0,0,0,.5)}
+.ecard.hero::before{background:var(--gold);width:4px}
+.ecard.hero .ecard-eyebrow{color:rgba(230,188,74,.7)}
+.ecard.hero .ecard-title{font-size:14px;color:#fff}
+.ecard.hero .ecard-body{color:rgba(220,234,244,.6);font-size:12px}
+.ecard.hero .ecard-stat{font-size:32px;background:linear-gradient(135deg,#fff 30%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* LENS CARDS */
+.lens-wrap{position:relative;width:560px;height:420px}
+
+.lens-flip{
+  position:absolute;perspective:900px;z-index:2;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.lens-flip.in{opacity:1;transform:translateY(0)}
+.lens-flip.lf-main{width:300px;height:320px;left:0;top:20px;z-index:3}
+.lens-flip.lf-mid{width:260px;height:240px;right:20px;top:0;z-index:2}
+.lens-flip.lf-sm{width:260px;height:240px;right:0;bottom:0;z-index:4}
+
+.flip-inner{
+  position:relative;width:100%;height:100%;
+  transition:transform .7s cubic-bezier(.4,0,.2,1);
+  transform-style:preserve-3d;
+}
+.lens-flip.flipped .flip-inner{transform:rotateY(180deg)}
+
+.flip-front,.flip-back{
+  position:absolute;inset:0;border-radius:20px;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  overflow:hidden;
+}
+.flip-front{
+  background:rgba(0,20,42,.55);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 4px 24px rgba(0,0,0,.25),0 0 1px rgba(255,255,255,.1) inset;
+}
+.flip-front::before{
+  content:'';position:absolute;left:0;top:10%;bottom:10%;width:3px;
+  background:var(--accent);border-radius:0 2px 2px 0;
+  box-shadow:0 0 16px var(--accent),0 0 40px var(--accent);opacity:.7;
+}
+.flip-front::after{
+  content:'';position:absolute;top:-30%;right:-20%;width:60%;height:60%;
+  background:radial-gradient(circle,rgba(255,255,255,.03) 0%,transparent 70%);
+  pointer-events:none;
+}
+.flip-back{
+  transform:rotateY(180deg);
+  background:rgba(0,14,30,.85);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(230,188,74,.15);
+  box-shadow:0 4px 24px rgba(0,0,0,.35),0 0 1px rgba(230,188,74,.15) inset;
+}
+.flip-back::before{
+  content:'';position:absolute;left:0;top:10%;bottom:10%;width:3px;
+  background:var(--gold);border-radius:0 2px 2px 0;
+  box-shadow:0 0 16px rgba(230,188,74,.6);opacity:.7;
+}
+.lc-inner{padding:32px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%}
+.lc-eyebrow{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.lc-title{font-size:18px;font-weight:700;color:rgba(255,255,255,.92);line-height:1.25;letter-spacing:-.01em;margin-bottom:8px}
+.lc-body{font-size:12px;color:rgba(220,234,244,.65);line-height:1.55}
+.lc-stat{font-size:52px;font-weight:800;letter-spacing:-.04em;line-height:1;
+  background:linear-gradient(135deg,#fff 20%,var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.lc-stat-label{font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(220,234,244,.65);margin-top:8px;max-width:200px}
+.lf-main .lc-title{font-size:20px}
+.lf-main .lc-stat{font-size:60px}
+
+/* STACKED LENS CARDS — S3 */
+.lens-stack .lens-flip{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%) scale(.96);
+  opacity:0;pointer-events:none;
+  transition:opacity .5s ease,transform .5s ease;
+}
+.lens-stack .lens-flip.lf-main,
+.lens-stack .lens-flip.lf-mid,
+.lens-stack .lens-flip.lf-sm,
+.lens-stack .lens-flip.lf-extra{
+  left:50%;top:50%;right:auto;bottom:auto;
+  width:340px;height:320px;
+}
+.lens-stack .lens-flip.stack-active{
+  opacity:1;transform:translate(-50%,-50%) scale(1);
+  z-index:10;pointer-events:all;
+}
+.lens-stack .lens-flip.stack-behind{
+  opacity:.25;transform:translate(-50%,-50%) scale(.92) translateX(8px);
+  z-index:5;
+}
+
+/* LENS CARDS — LIGHT TREATMENT */
+.lens-light{
+  background:rgba(255,255,255,.88) !important;
+  backdrop-filter:blur(20px) !important;-webkit-backdrop-filter:blur(20px) !important;
+  border:1px solid rgba(255,255,255,.6) !important;
+  box-shadow:0 2px 16px rgba(0,0,0,.08),0 8px 32px rgba(0,0,0,.06) !important;
+}
+.lens-light::before{
+  box-shadow:0 0 12px var(--accent),0 0 28px var(--accent) !important;
+}
+.lens-light::after{
+  background:radial-gradient(circle,var(--accent-light,rgba(0,0,0,.02)) 0%,transparent 70%) !important;
+}
+.lens-lt-title{color:#001a33 !important;font-weight:700}
+.lens-lt-body{color:#3d3835 !important}
+.lf-extra{width:260px;height:240px;right:20px;top:0;z-index:2}
+
+/* LENS PRINCIPLE CARDS */
+.lens-princ{
+  position:relative;flex:1;perspective:900px;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.lens-princ.in{opacity:1;transform:translateY(0)}
+.lens-princ-front{
+  position:relative;width:100%;height:100%;min-height:300px;
+  border-radius:20px;
+  background:rgba(0,20,42,.5);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.07);
+  box-shadow:0 4px 24px rgba(0,0,0,.2),0 0 1px rgba(255,255,255,.08) inset;
+  display:flex;align-items:flex-start;
+  overflow:hidden;
+}
+.lens-princ-front::before{
+  content:'';position:absolute;left:0;top:12%;bottom:12%;width:3px;
+  background:var(--accent);border-radius:0 2px 2px 0;
+  box-shadow:0 0 14px var(--accent),0 0 36px var(--accent);
+  opacity:.65;
+}
+.lens-princ-front::after{
+  content:'';position:absolute;top:-30%;right:-20%;width:60%;height:60%;
+  background:radial-gradient(circle,rgba(255,255,255,.025) 0%,transparent 70%);
+  pointer-events:none;
+}
+.lp-inner{padding:36px 32px;display:flex;flex-direction:column}
+.lp-num{font-size:48px;font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:14px;background:linear-gradient(135deg,#fff 20%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.lp-title{font-size:20px;font-weight:700;color:rgba(255,255,255,.92);line-height:1.2;margin-bottom:10px}
+.lp-rule{width:100%;height:2px;background:linear-gradient(90deg,var(--accent),transparent);opacity:.65;margin-bottom:14px}
+.lp-desc{font-size:13px;color:rgba(220,234,244,.72);line-height:1.65}
+
+/* S5 HUB */
+#s5{flex-direction:column;align-items:center;justify-content:center;gap:0;padding-top:0}
+#s5-headline{font-size:clamp(30px,4.2vw,56px);font-weight:800;letter-spacing:-.035em;color:var(--white);text-align:center;margin-bottom:4px;line-height:.95;opacity:0;transform:translateY(-10px);transition:opacity .7s ease,transform .7s ease}
+#s5-headline.in{opacity:1;transform:translateY(0)}
+#s5-headline em{color:var(--gold);font-style:normal}
+#s5-sub{font-size:13px;color:var(--muted);text-align:center;margin-bottom:16px;opacity:0;transition:opacity .7s ease .2s}
+#s5-sub.in{opacity:1}
+#hub-win{position:relative;width:min(1040px,92vw);height:min(560px,62vh);border-radius:10px;overflow:hidden;opacity:0;transform:scale(.96) translateY(12px);transition:opacity .9s ease .3s,transform .9s ease .3s;box-shadow:0 0 0 1px rgba(0,104,172,.45),0 0 80px rgba(0,104,172,.1),0 50px 120px rgba(0,0,0,.7)}
+#hub-win.in{opacity:1;transform:scale(1) translateY(0)}
+#hub-win::after{display:none}
+#hub-chrome{position:absolute;top:0;left:0;right:0;height:38px;background:rgba(0,14,28,.97);border-bottom:1px solid rgba(0,104,172,.35);display:flex;align-items:center;padding:0 14px;gap:8px;z-index:20}
+.cdot{width:10px;height:10px;border-radius:50%}
+.curl{flex:1;margin:0 12px;background:rgba(0,37,66,.8);border:1px solid rgba(0,104,172,.3);border-radius:4px;padding:5px 12px;font-size:11px;color:rgba(220,234,244,.4);letter-spacing:.04em;font-family:var(--ff)}
+#hub-scroll{position:absolute;top:38px;left:0;right:0;bottom:0;overflow:hidden}
+#hub-inner{position:absolute;top:0;left:0;right:0;transition:top 1.4s cubic-bezier(.76,0,.24,1)}
+.h-hero{background:linear-gradient(135deg,rgba(0,37,66,.98) 0%,rgba(0,90,140,.95) 100%);padding:44px 52px 40px;position:relative;overflow:hidden;min-height:290px}
+.h-hero::before{content:'';position:absolute;top:5%;right:-80px;width:340px;height:340px;border:1px solid rgba(230,188,74,.1);border-radius:50%}
+.h-hero::after{content:'';position:absolute;top:22%;right:30px;width:220px;height:220px;border:1px solid rgba(230,188,74,.18);border-radius:50%}
+.h-eb{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.h-eb::before{content:'';width:24px;height:1px;background:var(--gold)}
+.h-h1{font-size:44px;font-weight:800;line-height:.97;letter-spacing:-.03em;color:#fff;margin-bottom:14px}
+.h-h1 em{color:var(--gold);font-style:italic;font-weight:300}
+.h-lead{font-size:14px;color:rgba(255,255,255,.72);line-height:1.55;max-width:640px;margin-bottom:28px}
+.h-btns{display:flex;gap:12px}
+.h-bp{background:var(--gold);color:#002542;padding:11px 22px;font-size:13px;font-weight:700;letter-spacing:.04em;border-radius:3px;font-family:var(--ff)}
+.h-bs{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);padding:11px 22px;font-size:13px;border-radius:3px}
+.h-pillars{background:#f9f8f7;padding:36px 52px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.h-pill{background:#fff;border:1px solid #e8e6e3;border-top:3px solid var(--blue);padding:20px}
+.h-pill.t{border-top-color:#088697}.h-pill.n{border-top-color:#005a8c}.h-pill.a{border-top-color:#ad8c41}
+.h-pill-name{font-size:13px;font-weight:700;color:#002542;margin-bottom:4px}
+.h-pill-lead{font-size:11px;color:#a29c98;margin-bottom:10px}
+.h-tags{display:flex;flex-wrap:wrap;gap:4px}
+.h-tag{font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#dceaf4;color:#005a8c;padding:2px 7px;border-radius:2px}
+.h-wiz{background:#fff;padding:36px 52px;border-top:1px solid #e8e6e3}
+.h-wiz-title{font-size:22px;font-weight:700;color:#002542;margin-bottom:18px}
+.h-wiz-box{background:#f9f8f7;border:1px solid #e8e6e3;border-left:5px solid var(--gold);padding:28px}
+.h-wiz-q{font-size:17px;font-weight:700;color:#002542;margin-bottom:16px}
+.h-wiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.h-wiz-opt{background:#fff;border:1px solid #d5cfc9;padding:14px 18px;font-size:13px;color:#002542;font-weight:500;display:flex;justify-content:space-between;align-items:center}
+.h-wiz-opt::after{content:'a';color:var(--blue);font-size:16px}
+.h-sla{background:#f9f8f7;padding:36px 52px}
+.h-sla-title{font-size:22px;font-weight:700;color:#002542;margin-bottom:20px}
+.h-tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.h-tier{background:#fff;border:1px solid #e8e6e3;border-top:3px solid var(--blue);padding:20px}
+.h-tier.g{border-top-color:#ad8c41}.h-tier.t2{border-top-color:#088697}
+.h-tier-name{font-size:13px;font-weight:700;color:#002542;margin-bottom:4px}
+.h-tier-time{font-size:26px;font-weight:800;color:var(--blue);margin-bottom:6px}
+.h-tier.g .h-tier-time{color:#ad8c41}.h-tier.t2 .h-tier-time{color:#088697}
+.h-tier-desc{font-size:11px;color:#a29c98;line-height:1.5}
+
+/* S6 PRINCIPLES */
+#s6{align-items:stretch}
+.principle{display:flex;gap:22px;align-items:flex-start;margin-bottom:30px;opacity:0;transform:translateX(-16px);transition:opacity .6s ease,transform .6s ease}
+.principle.in{opacity:1;transform:translateX(0)}
+.p-num{font-size:50px;font-weight:800;letter-spacing:-.04em;color:var(--gold);line-height:1;min-width:56px;opacity:.75}
+.p-title{font-size:20px;font-weight:700;color:var(--white);margin-bottom:5px}
+.p-rule{width:36px;height:2px;background:var(--gold);opacity:.45;margin-bottom:8px;transform:scaleX(0);transform-origin:left;transition:transform .5s ease .3s}
+.principle.in .p-rule{transform:scaleX(1)}
+.p-desc{font-size:13px;color:var(--muted);line-height:1.6;max-width:400px}
+
+/* S7 CLOSE */
+#s7{flex-direction:column;align-items:center;text-align:center}
+#cl1{font-size:clamp(26px,3.8vw,50px);font-weight:300;color:rgba(220,234,244,.65);letter-spacing:-.02em;opacity:0;transition:opacity .8s ease}
+#cl1.in{opacity:1}
+#cl2{font-size:clamp(38px,5.8vw,78px);font-weight:800;letter-spacing:-.035em;line-height:.95;margin-top:8px;opacity:0;transform:translateY(12px);transition:opacity .8s ease .5s,transform .8s ease .5s}
+#cl2.in{opacity:1;transform:translateY(0)}
+#cl2 em{color:var(--gold);font-style:normal}
+#cl-rule{width:80px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:26px auto;transform:scaleX(0);transition:transform .8s ease 1.1s}
+#cl-rule.in{transform:scaleX(1)}
+#cl-names{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 6px;max-width:820px;margin-top:4px;opacity:0;transition:opacity .8s ease 1.5s}
+#cl-names.in{opacity:1}
+.cn{font-size:14px;font-weight:600;color:rgba(220,234,244,.85);transition:color .3s ease,text-shadow .3s ease}
+.cn.glow{color:#fff;text-shadow:0 0 20px rgba(230,188,74,.8),0 0 40px rgba(230,188,74,.3)}
+.csep{font-size:14px;color:rgba(230,188,74,.40);line-height:1.9}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur2"></div>
+<canvas id="particles"></canvas>
+<div id="vig"></div>
+<div id="flash"></div>
+<div id="wm">SR / CSI Digital - May 2026</div>
+<div id="nav"></div>
+<div id="snum"></div>
+
+<!-- S0 -->
+<div class="scene active" id="s0">
+  <div id="s0-you">You.</div>
+  <div id="s0-lines">
+    <div class="s0-line" id="s0-l1"></div>
+    <div class="s0-line" id="s0-l2"></div>
+  </div>
+</div>
+
+<!-- S1 -->
+<div class="scene" id="s1">
+  <div id="tl-outer">
+    <div class="fu" style="font-size:14px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#E6BC4A;opacity:.85;margin-bottom:14px;">The Timeline</div>
+    <svg id="tl-svg" viewBox="20 20 920 110" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <linearGradient id="tlg" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#0068AC"/>
+          <stop offset="50%" stop-color="#088697"/>
+          <stop offset="100%" stop-color="#E6BC4A"/>
+        </linearGradient>
+        <filter id="gf"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <line x1="80" y1="60" x2="880" y2="60" stroke="rgba(220,234,244,.07)" stroke-width="3"/>
+      <line id="tl-prog" x1="80" y1="60" x2="80" y2="60" stroke="url(#tlg)" stroke-width="3.5" stroke-linecap="round"/>
+      <g id="tl-nodes"></g>
+    </svg>
+    <div id="tl-copy">
+      <span id="tl-sent1">Your world is linear. You move a deal from left to right.<br>
+      But there is a <em style="color:var(--gold);font-style:normal;">parallel universe</em> running alongside every step.</span><br><br>
+      <span id="tl-sent2">Within this parallel universe is a team supporting our most important customer - Sales.</span>
+    </div>
+  </div>
+</div>
+
+<!-- S2 -->
+<div class="scene" id="s2">
+  <canvas id="uni-canvas"></canvas>
+  <div id="s2-content">
+    <div class="eyebrow fu" id="s2-ey" style="justify-content:center;margin-bottom:20px;">The Scale of What We Do</div>
+    <div class="scale-row">
+      <div class="scale-item" id="sc0"><div class="sc-num">5</div><div class="sc-label">Brands Supported</div></div>
+      <div class="s2-vdiv" id="sv1"></div>
+      <div class="scale-item" id="sc1"><div class="sc-num">20+</div><div class="sc-label">Active Channels</div></div>
+      <div class="s2-vdiv" id="sv2"></div>
+      <div class="scale-item" id="sc2"><div class="sc-num">1000s</div><div class="sc-label">Of Assets Built</div></div>
+    </div>
+    <div id="s2-sub">Every campaign launched. Every asset built.<br><br>Running in the background -<br>before you made the first call, and long after you closed the deal.</div>
+  </div>
+</div>
+
+<!-- S3 -->
+<div class="scene ls-scene" id="s3">
+  <div class="ls-left">
+    <div class="ls-title fu d1">Before you<br><span class="dim">made the call.</span></div>
+    <div class="gold-rule fu d2"></div>
+    <div class="ls-body fu d2">Our team was busy building the brand they recognize, the digital presence that warmed them up, and the campaigns that put CSI on their radar - so that they are primed when they pick up the phone.</div>
+    <div class="tl-strip fu d3">
+      <div class="tl-nd lit"><div class="tl-dot"></div>Prospect</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd lit"><div class="tl-dot"></div>Qualify</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd"><div class="tl-dot"></div>Demo</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd"><div class="tl-dot"></div>Propose</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd"><div class="tl-dot"></div>Close</div>
+    </div>
+  </div>
+  <div class="ls-right" style="padding:0 20px;">
+    <div class="lens-wrap lens-stack">
+      <!-- Card 1: Brand Foundation -->
+      <div class="lens-flip lens-lt lf-main" id="s3c0" style="--accent:#088697;--accent-light:rgba(8,134,151,.12);">
+        <div class="flip-inner">
+          <div class="flip-front lens-light"><div class="lc-inner">
+            <div class="lc-eyebrow" style="color:#088697;">Brand Foundation</div>
+            <div class="lc-title lens-lt-title">The Identity<br>They Recognize</div>
+            <div class="lc-body lens-lt-body">Brand guidelines, tone and voice, and visual systems built across all product brands before a rep ever enters a room.</div>
+          </div></div>
+        </div>
+      </div>
+      <!-- Mid card: Digital Infrastructure -->
+      <div class="lens-flip lens-lt lf-mid" id="s3c1" style="--accent:#0068AC;--accent-light:rgba(0,104,172,.12);">
+        <div class="flip-inner">
+          <div class="flip-front lens-light"><div class="lc-inner">
+            <div class="lc-eyebrow" style="color:#0068AC;">Digital Infrastructure</div>
+            <div class="lc-title lens-lt-title">Always On,<br>Always Working</div>
+            <div class="lc-body lens-lt-body">Websites, landing pages, and owned digital properties running 24/7 - building awareness while you sleep.</div>
+          </div></div>
+        </div>
+      </div>
+      <!-- Small card: Media & Campaigns -->
+      <div class="lens-flip lens-lt lf-sm" id="s3c2" style="--accent:#f07623;--accent-light:rgba(240,118,35,.12);">
+        <div class="flip-inner">
+          <div class="flip-front lens-light"><div class="lc-inner">
+            <div class="lc-eyebrow" style="color:#c05a10;">Media &amp; Campaigns</div>
+            <div class="lc-title lens-lt-title">The Room Is<br>Already Warm</div>
+            <div class="lc-body lens-lt-body">Paid social targeting, email sequences, and media plans priming every conversation.</div>
+          </div></div>
+        </div>
+      </div>
+      <!-- Fourth card: Events — overlay bottom left -->
+      <div class="lens-flip lens-lt lf-extra" id="s3c3" style="--accent:#b82b1e;--accent-light:rgba(184,43,30,.1);">
+        <div class="flip-inner">
+          <div class="flip-front lens-light"><div class="lc-inner">
+            <div class="lc-eyebrow" style="color:#8a1a1a;">Events &amp; Presence</div>
+            <div class="lc-title lens-lt-title">In the Room<br>Before You Are</div>
+            <div class="lc-body lens-lt-body">Trade shows, conferences, and industry events that put CSI on the map.</div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S4 -->
+<div class="scene" id="s4" style="flex-direction:column;align-items:center;justify-content:center;">
+  <div style="display:flex;flex-direction:column;align-items:center;text-align:center;max-width:820px;padding:0 60px;">
+    <div class="eyebrow fu" style="justify-content:center;margin-bottom:20px;">Case Study</div>
+    <div class="fu d1" style="font-size:clamp(38px,5.2vw,64px);font-weight:700;letter-spacing:-.03em;line-height:.97;color:#fff;margin-bottom:8px;">Meijer</div>
+    <div class="fu d2" style="font-size:clamp(18px,2.5vw,28px);font-weight:300;color:rgba(220,234,244,.72);margin-bottom:24px;">Precision Pre-Sale Execution</div>
+    <div class="gold-rule fu d2" style="margin:0 auto 28px;"></div>
+    <div class="fu d3" style="font-size:17px;color:rgba(220,234,244,.85);line-height:1.7;max-width:640px;">
+      Meeting attendees were identified and targeted with paid social ads about EnterpriseRx. An email campaign was designed to be deployed the day before the demo to attendees with direct links to Wegmans testimonials - so the room was primed before the first slide.
+    </div>
+    <div class="fu d4" style="display:flex;gap:56px;margin-top:40px;">
+      <div style="text-align:center;">
+        <div style="font-size:clamp(40px,5.5vw,64px);font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,#fff 30%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">260%</div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(220,234,244,.68);margin-top:4px;">Increase in Social Page Engagement by Meijer Employees Over the Last Two Weeks</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:clamp(40px,5.5vw,64px);font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,#fff 30%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Continuous</div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(220,234,244,.68);margin-top:4px;">100% of Identified Meijer Executives Will Be Targeted on LinkedIn Until the Day of the Meeting and Served With Content Post-Meeting</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scene ls-scene" id="s5">
+  <div class="ls-left">
+    <div class="ls-title fu d1">While you<br><span class="dim">were closing.</span></div>
+    <div class="gold-rule fu d2"></div>
+    <div class="ls-body fu d2">Every deck, every proof point, every competitive insight you had walking in. Our team built it. While you were in the room - so were we.</div>
+    <div class="tl-strip fu d3">
+      <div class="tl-nd"><div class="tl-dot"></div>Prospect</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd"><div class="tl-dot"></div>Qualify</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd lit"><div class="tl-dot"></div>Demo</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd lit"><div class="tl-dot"></div>Propose</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd lit"><div class="tl-dot"></div>Close</div>
+    </div>
+  </div>
+  <div class="ls-right" style="padding:0 20px;">
+    <div class="lens-wrap">
+      <!-- Main card: Sales Arsenal -->
+      <div class="lens-flip lf-main" id="flip0" style="--accent:#088697;">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="lc-inner">
+            <div class="lc-eyebrow">Sales Arsenal</div>
+            <div class="lc-title">The Pitch Deck.<br>The One-Pager.<br>The Kit.</div>
+            <div class="lc-body">Branded presentations, sell sheets, and collateral built across every product line.</div>
+          </div></div>
+          <div class="flip-back"><div class="lc-inner">
+            <div class="lc-stat">300+</div>
+            <div class="lc-stat-label">Assets Delivered</div>
+          </div></div>
+        </div>
+      </div>
+      <!-- Mid card: Competitive Intelligence -->
+      <div class="lens-flip lf-mid" id="flip1" style="--accent:#0068AC;">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="lc-inner">
+            <div class="lc-eyebrow">Competitive Intelligence</div>
+            <div class="lc-title">You Know What<br>They Will Say</div>
+            <div class="lc-body">Battlecards, briefs, and objection-handling content.</div>
+          </div></div>
+          <div class="flip-back"><div class="lc-inner">
+            <div class="lc-stat">20+</div>
+            <div class="lc-stat-label">Content Channels Driving Content Decisions</div>
+          </div></div>
+        </div>
+      </div>
+      <!-- Small card: Content -->
+      <div class="lens-flip lf-sm" id="flip2" style="--accent:#f07623;">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="lc-inner">
+            <div class="lc-eyebrow">Content</div>
+            <div class="lc-title" style="font-size:22px;">Video.<br>Testimonials.<br>Results.</div>
+          </div></div>
+          <div class="flip-back"><div class="lc-inner">
+            <div class="lc-stat">250%</div>
+            <div class="lc-stat-label">Increase in Engagement</div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S5 -->
+<div class="scene" id="s6" style="flex-direction:column;align-items:center;justify-content:center;">
+  <div style="display:flex;flex-direction:column;align-items:center;text-align:center;max-width:820px;padding:0 60px;">
+    <div class="eyebrow fu" style="justify-content:center;margin-bottom:20px;">Case Study</div>
+    <div class="fu d1" style="font-size:clamp(38px,5.2vw,64px);font-weight:700;letter-spacing:-.03em;line-height:.97;color:#fff;margin-bottom:8px;">Volkart May Campaign</div>
+    <div class="fu d2" style="font-size:clamp(18px,2.5vw,28px);font-weight:300;color:rgba(220,234,244,.72);margin-bottom:24px;">B2B Lead Generation for Macro Helix</div>
+    <div class="gold-rule fu d2" style="margin:0 auto 28px;"></div>
+    <div class="fu d3" style="font-size:17px;color:rgba(220,234,244,.85);line-height:1.7;max-width:640px;">
+      A B2B lead generation initiative designed to directly support Macro Helix sales with qualified leads and booked appointments. The campaign contacted more than 1,200 qualified decision makers and returned leads that generated more than $2 million in revenue.
+    </div>
+    <div class="fu d4" style="display:flex;gap:56px;margin-top:40px;">
+      <div style="text-align:center;">
+        <div style="font-size:clamp(40px,5.5vw,64px);font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,#fff 30%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">1,200+</div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(220,234,244,.68);margin-top:4px;">Qualified Decision Makers Contacted</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:clamp(40px,5.5vw,64px);font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,#fff 30%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">$2M</div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(220,234,244,.68);margin-top:4px;">In Revenue Generated</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scene" id="s7">
+  <div id="s5-headline">The <em>Future</em> of Work</div>
+  <div id="s5-sub">One place to find every resource, route every request, and work with our team.</div>
+  <div id="hub-win">
+    <div id="hub-chrome">
+      <div class="cdot" style="background:#ff5f57"></div>
+      <div class="cdot" style="background:#febc2e"></div>
+      <div class="cdot" style="background:#28c840"></div>
+      <div class="curl">csi-marketing-hub.mckesson.com</div>
+    </div>
+    <div id="hub-scroll">
+      <div id="hub-inner">
+        <div class="h-hero">
+          <div class="h-eb">McKesson CSI Strategic Marketing</div>
+          <div class="h-h1">How We <em>Work</em><br>With You.</div>
+          <div class="h-lead">An integrated growth engine across CSI - lead generation, customer adoption, retention, expansion, sales enablement, and launches. One team. Four disciplines. Built for you.</div>
+          <div class="h-btns"><div class="h-bp">Find the Right Team &rarr;</div><div class="h-bs">Submit a Request</div></div>
+        </div>
+        <div class="h-pillars">
+          <div class="h-pill"><div class="h-pill-name">Product Marketing</div><div class="h-pill-lead">Kaylee H &middot; Kristin K &middot; Lisa A</div><div class="h-tags"><span class="h-tag">Positioning</span><span class="h-tag">GTM</span><span class="h-tag">Enablement</span></div></div>
+          <div class="h-pill t"><div class="h-pill-name">Brand &amp; Growth</div><div class="h-pill-lead">Scott R &middot; Paul N &middot; Tiz G &middot; Bill D &middot; Alex V</div><div class="h-tags"><span class="h-tag">Design</span><span class="h-tag">Digital</span><span class="h-tag">Campaigns</span></div></div>
+          <div class="h-pill n"><div class="h-pill-name">Communications</div><div class="h-pill-lead">Whitney Z &middot; Kayleigh G &middot; Lauren L</div><div class="h-tags"><span class="h-tag">Internal</span><span class="h-tag">Executive</span><span class="h-tag">PR</span></div></div>
+          <div class="h-pill a"><div class="h-pill-name">Marketing Operations</div><div class="h-pill-lead">Kathy P &middot; Cindy C</div><div class="h-tags"><span class="h-tag">Events</span><span class="h-tag">Budget</span><span class="h-tag">Programs</span></div></div>
+        </div>
+        <div class="h-wiz">
+          <div class="h-wiz-title">Not sure who to go to? Start here.</div>
+          <div class="h-wiz-box">
+            <div class="h-wiz-q">What are you trying to accomplish?</div>
+            <div class="h-wiz-opts">
+              <div class="h-wiz-opt">I need something produced or designed</div>
+              <div class="h-wiz-opt">I need to shape a message or position</div>
+              <div class="h-wiz-opt">I need to announce or communicate</div>
+              <div class="h-wiz-opt">I need event or program support</div>
+            </div>
+          </div>
+        </div>
+        <div class="h-sla">
+          <div class="h-sla-title">How fast can we move?</div>
+          <div class="h-tiers">
+            <div class="h-tier"><div class="h-tier-name">Express</div><div class="h-tier-time">3&ndash;5 days</div><div class="h-tier-desc">Approved copy, clear direction. Ready to build immediately.</div></div>
+            <div class="h-tier g"><div class="h-tier-name">Standard</div><div class="h-tier-time">2&ndash;3 weeks</div><div class="h-tier-desc">Strategy, design, and production with structured review cycles.</div></div>
+            <div class="h-tier t2"><div class="h-tier-name">Complex</div><div class="h-tier-time">6&ndash;12 weeks</div><div class="h-tier-desc">Full launches, brand systems, cross-functional programs.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6 -->
+<div class="scene" id="s8" style="flex-direction:column;align-items:center;justify-content:center;">
+  <div style="display:flex;flex-direction:column;align-items:center;text-align:center;max-width:900px;padding:0 60px;margin-bottom:32px;">
+    <div class="eyebrow fu" style="justify-content:center;margin-bottom:16px;">Work With Us</div>
+    <div class="fu d1" style="font-size:clamp(36px,4.8vw,60px);font-weight:700;letter-spacing:-.03em;line-height:.97;margin-bottom:12px;">
+      Three things that<br><span style="color:rgba(220,234,244,.32);font-weight:200;">change everything.</span>
+    </div>
+    <div class="gold-rule fu d2" style="margin:12px auto 0;"></div>
+  </div>
+
+  <div class="fu d3" style="display:flex;gap:20px;align-items:stretch;max-width:1050px;padding:0 40px;">
+    <!-- Principle 1 -->
+    <div class="lens-flip lens-princ" id="princ0" style="--accent:#0bb4c9;">
+      <div class="flip-inner">
+        <div class="flip-front lens-princ-front">
+          <div class="lp-inner">
+            <div class="lp-num">01</div>
+            <div class="lp-title">Treat us as strategic partners.</div>
+            <div class="lp-rule"></div>
+            <div class="lp-desc">Bring us in early - before decisions are locked. Our best work happens when we are in the room during planning, not handed a brief at the end.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Principle 2 -->
+    <div class="lens-flip lens-princ" id="princ1" style="--accent:#1a90d8;">
+      <div class="flip-inner">
+        <div class="flip-front lens-princ-front">
+          <div class="lp-inner">
+            <div class="lp-num">02</div>
+            <div class="lp-title">Its all in the brief.</div>
+            <div class="lp-rule"></div>
+            <div class="lp-desc">Approved copy, clear goals, defined audience, confirmed deadline. Requests with context are prioritized. Requests without these elements hinder output.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Principle 3 -->
+    <div class="lens-flip lens-princ" id="princ2" style="--accent:#E6BC4A;">
+      <div class="flip-inner">
+        <div class="flip-front lens-princ-front">
+          <div class="lp-inner">
+            <div class="lp-num">03</div>
+            <div class="lp-title">Engage curiously.</div>
+            <div class="lp-rule"></div>
+            <div class="lp-desc">Continuously bring us ideas and feedback based on real conversations you are having and real things you are seeing in the field. Intel from you helps us elevate our efforts across the board.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="cur2"></div>
+<canvas id="particles"></canvas>
+<div id="vig"></div>
+<div id="flash"></div>
+<div id="wm">SR / CSI Digital - May 2026</div>
+<div id="nav"></div>
+<div id="snum"></div>
+
+<!-- S0 -->
+<div class="scene active" id="s0">
+  <div id="s0-you">You.</div>
+  <div id="s0-lines">
+    <div class="s0-line" id="s0-l1"></div>
+    <div class="s0-line" id="s0-l2"></div>
+  </div>
+</div>
+
+<!-- S1 -->
+<div class="scene" id="s1">
+  <div id="tl-outer">
+    <div class="fu" style="font-size:14px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#E6BC4A;opacity:.85;margin-bottom:14px;">The Timeline</div>
+    <svg id="tl-svg" viewBox="20 20 920 110" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <linearGradient id="tlg" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#0068AC"/>
+          <stop offset="50%" stop-color="#088697"/>
+          <stop offset="100%" stop-color="#E6BC4A"/>
+        </linearGradient>
+        <filter id="gf"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <line x1="80" y1="60" x2="880" y2="60" stroke="rgba(220,234,244,.07)" stroke-width="3"/>
+      <line id="tl-prog" x1="80" y1="60" x2="80" y2="60" stroke="url(#tlg)" stroke-width="3.5" stroke-linecap="round"/>
+      <g id="tl-nodes"></g>
+    </svg>
+    <div id="tl-copy">
+      <span id="tl-sent1">Your world is linear. You move a deal from left to right.<br>
+      But there is a <em style="color:var(--gold);font-style:normal;">parallel universe</em> running alongside every step.</span><br><br>
+      <span id="tl-sent2">Within this parallel universe is a team supporting our most important customer - Sales.</span>
+    </div>
+  </div>
+</div>
+
+<!-- S2 -->
+<div class="scene" id="s2">
+  <canvas id="uni-canvas"></canvas>
+  <div id="s2-content">
+    <div class="eyebrow fu" id="s2-ey" style="justify-content:center;margin-bottom:20px;">The Scale of What We Do</div>
+    <div class="scale-row">
+      <div class="scale-item" id="sc0"><div class="sc-num">5</div><div class="sc-label">Brands Supported</div></div>
+      <div class="s2-vdiv" id="sv1"></div>
+      <div class="scale-item" id="sc1"><div class="sc-num">20+</div><div class="sc-label">Active Channels</div></div>
+      <div class="s2-vdiv" id="sv2"></div>
+      <div class="scale-item" id="sc2"><div class="sc-num">1000s</div><div class="sc-label">Of Assets Built</div></div>
+    </div>
+    <div id="s2-sub">Every campaign launched. Every asset built.<br><br>Running in the background -<br>before you made the first call, and long after you closed the deal.</div>
+  </div>
+</div>
+
+<!-- S3 -->
+<div class="scene ls-scene" id="s3">
+  <div class="ls-left">
+    <div class="ls-title fu d1">Before you<br><span class="dim">made the call.</span></div>
+    <div class="gold-rule fu d2"></div>
+    <div class="ls-body fu d2">Our team was busy building the brand they recognize, the digital presence that warmed them up, and the campaigns that put CSI on their radar - so that they are primed when they pick up the phone.</div>
+    <div class="tl-strip fu d3">
+      <div class="tl-nd lit"><div class="tl-dot"></div>Prospect</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd lit"><div class="tl-dot"></div>Qualify</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd"><div class="tl-dot"></div>Demo</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd"><div class="tl-dot"></div>Propose</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd"><div class="tl-dot"></div>Close</div>
+    </div>
+  </div>
+  <div class="ls-right" style="padding:0 20px;">
+    <div class="lens-wrap lens-stack">
+      <!-- Card 1: Brand Foundation -->
+      <div class="lens-flip lens-lt lf-main" id="s3c0" style="--accent:#088697;--accent-light:rgba(8,134,151,.12);">
+        <div class="flip-inner">
+          <div class="flip-front lens-light"><div class="lc-inner">
+            <div class="lc-eyebrow" style="color:#088697;">Brand Foundation</div>
+            <div class="lc-title lens-lt-title">The Identity<br>They Recognize</div>
+            <div class="lc-body lens-lt-body">Brand guidelines, tone and voice, and visual systems built across all product brands before a rep ever enters a room.</div>
+          </div></div>
+        </div>
+      </div>
+      <!-- Mid card: Digital Infrastructure -->
+      <div class="lens-flip lens-lt lf-mid" id="s3c1" style="--accent:#0068AC;--accent-light:rgba(0,104,172,.12);">
+        <div class="flip-inner">
+          <div class="flip-front lens-light"><div class="lc-inner">
+            <div class="lc-eyebrow" style="color:#0068AC;">Digital Infrastructure</div>
+            <div class="lc-title lens-lt-title">Always On,<br>Always Working</div>
+            <div class="lc-body lens-lt-body">Websites, landing pages, and owned digital properties running 24/7 - building awareness while you sleep.</div>
+          </div></div>
+        </div>
+      </div>
+      <!-- Small card: Media & Campaigns -->
+      <div class="lens-flip lens-lt lf-sm" id="s3c2" style="--accent:#f07623;--accent-light:rgba(240,118,35,.12);">
+        <div class="flip-inner">
+          <div class="flip-front lens-light"><div class="lc-inner">
+            <div class="lc-eyebrow" style="color:#c05a10;">Media &amp; Campaigns</div>
+            <div class="lc-title lens-lt-title">The Room Is<br>Already Warm</div>
+            <div class="lc-body lens-lt-body">Paid social targeting, email sequences, and media plans priming every conversation.</div>
+          </div></div>
+        </div>
+      </div>
+      <!-- Fourth card: Events — overlay bottom left -->
+      <div class="lens-flip lens-lt lf-extra" id="s3c3" style="--accent:#b82b1e;--accent-light:rgba(184,43,30,.1);">
+        <div class="flip-inner">
+          <div class="flip-front lens-light"><div class="lc-inner">
+            <div class="lc-eyebrow" style="color:#8a1a1a;">Events &amp; Presence</div>
+            <div class="lc-title lens-lt-title">In the Room<br>Before You Are</div>
+            <div class="lc-body lens-lt-body">Trade shows, conferences, and industry events that put CSI on the map.</div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S4 -->
+<div class="scene" id="s4" style="flex-direction:column;align-items:center;justify-content:center;">
+  <div style="display:flex;flex-direction:column;align-items:center;text-align:center;max-width:820px;padding:0 60px;">
+    <div class="eyebrow fu" style="justify-content:center;margin-bottom:20px;">Case Study</div>
+    <div class="fu d1" style="font-size:clamp(38px,5.2vw,64px);font-weight:700;letter-spacing:-.03em;line-height:.97;color:#fff;margin-bottom:8px;">Meijer</div>
+    <div class="fu d2" style="font-size:clamp(18px,2.5vw,28px);font-weight:300;color:rgba(220,234,244,.72);margin-bottom:24px;">Precision Pre-Sale Execution</div>
+    <div class="gold-rule fu d2" style="margin:0 auto 28px;"></div>
+    <div class="fu d3" style="font-size:17px;color:rgba(220,234,244,.85);line-height:1.7;max-width:640px;">
+      Meeting attendees were identified and targeted with paid social ads about EnterpriseRx. An email campaign was designed to be deployed the day before the demo to attendees with direct links to Wegmans testimonials - so the room was primed before the first slide.
+    </div>
+    <div class="fu d4" style="display:flex;gap:56px;margin-top:40px;">
+      <div style="text-align:center;">
+        <div style="font-size:clamp(40px,5.5vw,64px);font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,#fff 30%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">260%</div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(220,234,244,.68);margin-top:4px;">Increase in Social Page Engagement by Meijer Employees Over the Last Two Weeks</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:clamp(40px,5.5vw,64px);font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,#fff 30%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Continuous</div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(220,234,244,.68);margin-top:4px;">100% of Identified Meijer Executives Will Be Targeted on LinkedIn Until the Day of the Meeting and Served With Content Post-Meeting</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scene ls-scene" id="s5">
+  <div class="ls-left">
+    <div class="ls-title fu d1">While you<br><span class="dim">were closing.</span></div>
+    <div class="gold-rule fu d2"></div>
+    <div class="ls-body fu d2">Every deck, every proof point, every competitive insight you had walking in. Our team built it. While you were in the room - so were we.</div>
+    <div class="tl-strip fu d3">
+      <div class="tl-nd"><div class="tl-dot"></div>Prospect</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd"><div class="tl-dot"></div>Qualify</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd lit"><div class="tl-dot"></div>Demo</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd lit"><div class="tl-dot"></div>Propose</div>
+      <div class="tl-conn"></div>
+      <div class="tl-nd lit"><div class="tl-dot"></div>Close</div>
+    </div>
+  </div>
+  <div class="ls-right" style="padding:0 20px;">
+    <div class="lens-wrap">
+      <!-- Main card: Sales Arsenal -->
+      <div class="lens-flip lf-main" id="flip0" style="--accent:#088697;">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="lc-inner">
+            <div class="lc-eyebrow">Sales Arsenal</div>
+            <div class="lc-title">The Pitch Deck.<br>The One-Pager.<br>The Kit.</div>
+            <div class="lc-body">Branded presentations, sell sheets, and collateral built across every product line.</div>
+          </div></div>
+          <div class="flip-back"><div class="lc-inner">
+            <div class="lc-stat">300+</div>
+            <div class="lc-stat-label">Assets Delivered</div>
+          </div></div>
+        </div>
+      </div>
+      <!-- Mid card: Competitive Intelligence -->
+      <div class="lens-flip lf-mid" id="flip1" style="--accent:#0068AC;">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="lc-inner">
+            <div class="lc-eyebrow">Competitive Intelligence</div>
+            <div class="lc-title">You Know What<br>They Will Say</div>
+            <div class="lc-body">Battlecards, briefs, and objection-handling content.</div>
+          </div></div>
+          <div class="flip-back"><div class="lc-inner">
+            <div class="lc-stat">20+</div>
+            <div class="lc-stat-label">Content Channels Driving Content Decisions</div>
+          </div></div>
+        </div>
+      </div>
+      <!-- Small card: Content -->
+      <div class="lens-flip lf-sm" id="flip2" style="--accent:#f07623;">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="lc-inner">
+            <div class="lc-eyebrow">Content</div>
+            <div class="lc-title" style="font-size:22px;">Video.<br>Testimonials.<br>Results.</div>
+          </div></div>
+          <div class="flip-back"><div class="lc-inner">
+            <div class="lc-stat">250%</div>
+            <div class="lc-stat-label">Increase in Engagement</div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S5 -->
+<div class="scene" id="s6" style="flex-direction:column;align-items:center;justify-content:center;">
+  <div style="display:flex;flex-direction:column;align-items:center;text-align:center;max-width:820px;padding:0 60px;">
+    <div class="eyebrow fu" style="justify-content:center;margin-bottom:20px;">Case Study</div>
+    <div class="fu d1" style="font-size:clamp(38px,5.2vw,64px);font-weight:700;letter-spacing:-.03em;line-height:.97;color:#fff;margin-bottom:8px;">Volkart May Campaign</div>
+    <div class="fu d2" style="font-size:clamp(18px,2.5vw,28px);font-weight:300;color:rgba(220,234,244,.72);margin-bottom:24px;">B2B Lead Generation for Macro Helix</div>
+    <div class="gold-rule fu d2" style="margin:0 auto 28px;"></div>
+    <div class="fu d3" style="font-size:17px;color:rgba(220,234,244,.85);line-height:1.7;max-width:640px;">
+      A B2B lead generation initiative designed to directly support Macro Helix sales with qualified leads and booked appointments. The campaign contacted more than 1,200 qualified decision makers and returned leads that generated more than $2 million in revenue.
+    </div>
+    <div class="fu d4" style="display:flex;gap:56px;margin-top:40px;">
+      <div style="text-align:center;">
+        <div style="font-size:clamp(40px,5.5vw,64px);font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,#fff 30%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">1,200+</div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(220,234,244,.68);margin-top:4px;">Qualified Decision Makers Contacted</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:clamp(40px,5.5vw,64px);font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,#fff 30%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">$2M</div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(220,234,244,.68);margin-top:4px;">In Revenue Generated</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scene" id="s7">
+  <div id="s5-headline">The <em>Future</em> of Work</div>
+  <div id="s5-sub">One place to find every resource, route every request, and work with our team.</div>
+  <div id="hub-win">
+    <div id="hub-chrome">
+      <div class="cdot" style="background:#ff5f57"></div>
+      <div class="cdot" style="background:#febc2e"></div>
+      <div class="cdot" style="background:#28c840"></div>
+      <div class="curl">csi-marketing-hub.mckesson.com</div>
+    </div>
+    <div id="hub-scroll">
+      <div id="hub-inner">
+        <div class="h-hero">
+          <div class="h-eb">McKesson CSI Strategic Marketing</div>
+          <div class="h-h1">How We <em>Work</em><br>With You.</div>
+          <div class="h-lead">An integrated growth engine across CSI - lead generation, customer adoption, retention, expansion, sales enablement, and launches. One team. Four disciplines. Built for you.</div>
+          <div class="h-btns"><div class="h-bp">Find the Right Team &rarr;</div><div class="h-bs">Submit a Request</div></div>
+        </div>
+        <div class="h-pillars">
+          <div class="h-pill"><div class="h-pill-name">Product Marketing</div><div class="h-pill-lead">Kaylee H &middot; Kristin K &middot; Lisa A</div><div class="h-tags"><span class="h-tag">Positioning</span><span class="h-tag">GTM</span><span class="h-tag">Enablement</span></div></div>
+          <div class="h-pill t"><div class="h-pill-name">Brand &amp; Growth</div><div class="h-pill-lead">Scott R &middot; Paul N &middot; Tiz G &middot; Bill D &middot; Alex V</div><div class="h-tags"><span class="h-tag">Design</span><span class="h-tag">Digital</span><span class="h-tag">Campaigns</span></div></div>
+          <div class="h-pill n"><div class="h-pill-name">Communications</div><div class="h-pill-lead">Whitney Z &middot; Kayleigh G &middot; Lauren L</div><div class="h-tags"><span class="h-tag">Internal</span><span class="h-tag">Executive</span><span class="h-tag">PR</span></div></div>
+          <div class="h-pill a"><div class="h-pill-name">Marketing Operations</div><div class="h-pill-lead">Kathy P &middot; Cindy C</div><div class="h-tags"><span class="h-tag">Events</span><span class="h-tag">Budget</span><span class="h-tag">Programs</span></div></div>
+        </div>
+        <div class="h-wiz">
+          <div class="h-wiz-title">Not sure who to go to? Start here.</div>
+          <div class="h-wiz-box">
+            <div class="h-wiz-q">What are you trying to accomplish?</div>
+            <div class="h-wiz-opts">
+              <div class="h-wiz-opt">I need something produced or designed</div>
+              <div class="h-wiz-opt">I need to shape a message or position</div>
+              <div class="h-wiz-opt">I need to announce or communicate</div>
+              <div class="h-wiz-opt">I need event or program support</div>
+            </div>
+          </div>
+        </div>
+        <div class="h-sla">
+          <div class="h-sla-title">How fast can we move?</div>
+          <div class="h-tiers">
+            <div class="h-tier"><div class="h-tier-name">Express</div><div class="h-tier-time">3&ndash;5 days</div><div class="h-tier-desc">Approved copy, clear direction. Ready to build immediately.</div></div>
+            <div class="h-tier g"><div class="h-tier-name">Standard</div><div class="h-tier-time">2&ndash;3 weeks</div><div class="h-tier-desc">Strategy, design, and production with structured review cycles.</div></div>
+            <div class="h-tier t2"><div class="h-tier-name">Complex</div><div class="h-tier-time">6&ndash;12 weeks</div><div class="h-tier-desc">Full launches, brand systems, cross-functional programs.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6 -->
+<div class="scene" id="s8">
+  <div id="s8-left">
+    <div class="eyebrow fu">Work With Us</div>
+    <div class="fu d1" style="font-size:clamp(32px,4.2vw,54px);font-weight:700;letter-spacing:-.03em;line-height:.97;margin-bottom:32px;">Three things that<br><span style="color:rgba(220,234,244,.28);font-weight:200;">change everything.</span></div>
+    <div class="principle">
+      <div class="p-num">01</div>
+      <div class="p-body"><div class="p-title">Start with the right team.</div><div class="p-rule"></div><div class="p-desc">Continuously bring us ideas and feedback based on real conversations you are having and real things you are seeing in the field. Intel from you helps us elevate our efforts across the board.</div></div>
+    </div>
+    <div class="principle">
+      <div class="p-num">02</div>
+      <div class="p-body"><div class="p-title">Bring a real brief.</div><div class="p-rule"></div><div class="p-desc">Approved copy, clear goals, defined audience, confirmed deadline. Requests with context are prioritized. Requests without these elements hinder output.</div></div>
+    </div>
+    <div class="principle">
+      <div class="p-num">03</div>
+      <div class="p-body"><div class="p-title">Treat us as strategic partners.</div><div class="p-rule"></div><div class="p-desc">Bring us in early - before decisions are locked. Our best work happens when we are in the room during planning, not handed a brief at the end.</div></div>
+    </div>
+  </div>
+  <div id="s8-right">
+    <canvas id="s8c" width="420" height="520"></canvas>
+  </div>
+</div>
+
+<!-- S7 -->
+<div class="scene" id="s9">
+  <div style="display:flex;flex-direction:column;align-items:center;text-align:center;max-width:900px;padding:0 60px">
+    <div id="cl1">Behind every deal you close</div>
+    <div id="cl2">there is a team<br>that <em>never stops.</em></div>
+    <div id="cl-rule"></div>
+    <div id="cl-names">
+      <span class="cn">John Flynn</span><span class="csep"> &middot; </span>
+      <span class="cn">Scott Reitzel</span><span class="csep"> &middot; </span>
+      <span class="cn">Kaylee Holzapfel</span><span class="csep"> &middot; </span>
+      <span class="cn">Kristin Koslosky</span><span class="csep"> &middot; </span>
+      <span class="cn">Lisa Arnold</span><span class="csep"> &middot; </span>
+      <span class="cn">Whitney Zastrow</span><span class="csep"> &middot; </span>
+      <span class="cn">Kayleigh Glass</span><span class="csep"> &middot; </span>
+      <span class="cn">Lauren Lewis</span><span class="csep"> &middot; </span>
+      <span class="cn">Paul Neumann</span><span class="csep"> &middot; </span>
+      <span class="cn">Tiz Gill</span><span class="csep"> &middot; </span>
+      <span class="cn">Bill DeRose</span><span class="csep"> &middot; </span>
+      <span class="cn">Alex Vandervall</span><span class="csep"> &middot; </span>
+      <span class="cn">Kathy Prokopovich</span><span class="csep"> &middot; </span>
+      <span class="cn">Cindy Campbell</span>
+    </div>
+  </div>
+</div>
+
+<script>
+// SR / CSI Digital - May 2026 | Scott Reitzel
+const TOTAL=10;let cur=0,trans=false,s0p=0,hubTimer=null,glowTimer=null;
+const C1=document.getElementById('cur'),C2=document.getElementById('cur2');
+document.addEventListener('mousemove',e=>{C1.style.left=e.clientX+'px';C1.style.top=e.clientY+'px';C2.style.left=e.clientX+'px';C2.style.top=e.clientY+'px'});
+
+// PARTICLES
+const pc=document.getElementById('particles'),px=pc.getContext('2d');
+let pars=[],pf=0;
+function resizeP(){pc.width=innerWidth;pc.height=innerHeight}resizeP();window.addEventListener('resize',resizeP);
+function initP(){pars=[];for(let i=0;i<260;i++){const l=Math.floor(Math.random()*3);pars.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:[.22,.55,1.2][l]+Math.random()*.4,base:[.04,.13,.36][l]+Math.random()*.03,spd:[.0005,.002,.006][l]+Math.random()*.001,ph:Math.random()*Math.PI*2,dx:([.009,.035,.12][l]+Math.random()*.02)*(Math.random()>.5?1:-1),dy:([.003,.009,.028][l]+Math.random()*.01)*(Math.random()>.5?1:-1),l})}}
+initP();
+let sh=[];
+function animP(){pf++;px.clearRect(0,0,pc.width,pc.height);pars.forEach(p=>{const t=pf*p.spd+p.ph,op=p.base+Math.sin(t)*p.base*.85;const c=p.l===2?`rgba(238,232,218,${Math.max(0,op)})`:p.l===1?`rgba(220,234,244,${Math.max(0,op)})`:`rgba(170,200,235,${Math.max(0,op)})`;px.beginPath();px.arc(p.x,p.y,p.r,0,Math.PI*2);px.fillStyle=c;px.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<-5)p.x=pc.width+5;if(p.x>pc.width+5)p.x=-5;if(p.y<-5)p.y=pc.height+5;if(p.y>pc.height+5)p.y=-5});if(pf%400===0&&sh.length<2)sh.push({x:Math.random()*pc.width*.5,y:Math.random()*pc.height*.4,len:90+Math.random()*100,spd:9+Math.random()*6,op:1,a:Math.PI/6+(Math.random()-.5)*.25});sh=sh.filter(s=>s.op>.02);sh.forEach(s=>{const ex=s.x+Math.cos(s.a)*s.len,ey=s.y+Math.sin(s.a)*s.len;const g=px.createLinearGradient(s.x,s.y,ex,ey);g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(.5,`rgba(220,234,244,${s.op*.5})`);g.addColorStop(1,`rgba(230,188,74,${s.op})`);px.beginPath();px.moveTo(s.x,s.y);px.lineTo(ex,ey);px.strokeStyle=g;px.lineWidth=1.2;px.stroke();s.x+=Math.cos(s.a)*s.spd;s.y+=Math.sin(s.a)*s.spd;s.op-=.018});requestAnimationFrame(animP)}
+animP();
+
+// NAV
+function buildNav(){const nav=document.getElementById('nav');nav.innerHTML='';for(let i=0;i<TOTAL;i++){const d=document.createElement('div');d.className='nd'+(i===cur?' active':i<cur?' done':'');d.onclick=()=>goTo(i);nav.appendChild(d)}document.getElementById('snum').textContent=cur===0?'':`${String(cur).padStart(2,'0')} / ${String(TOTAL-1).padStart(2,'0')}`}
+buildNav();
+
+function goTo(n){if(trans||n===cur||n<0||n>=TOTAL)return;trans=true;if(cur===7)clearInterval(hubTimer);if(cur===1){clearTimeout(tlPulseTimer);clearTimeout(tlCopyTimer1);clearTimeout(tlCopyTimer2)};if(cur===9)clearInterval(glowTimer);const fl=document.getElementById('flash');fl.classList.add('pop');setTimeout(()=>fl.classList.remove('pop'),180);document.getElementById('s'+cur).classList.remove('active');setTimeout(()=>{cur=n;document.getElementById('s'+n).classList.add('active');activateScene(n);buildNav();trans=false},320)}
+
+function activateScene(n){const el=document.getElementById('s'+n);el.querySelectorAll('.fu').forEach((f,i)=>{f.classList.remove('in');setTimeout(()=>f.classList.add('in'),60+i*25)});if(n===0)initS0();if(n===1)initS1();if(n===2)initS2();if(n===3){initLife(n);initS3Cards();}if(n===5){initLife(n);initFlips();}if(n===7)initS5();if(n===8)initS6();if(n===9)initS7()}
+setTimeout(()=>activateScene(0),200);
+
+// INPUT - S0 intercept
+document.addEventListener('keydown',e=>{
+  if(['Space','ArrowRight','ArrowDown'].includes(e.code)){e.preventDefault();if(cur===0&&s0p===0){bloomS0();return}if(cur===3&&s3Active){if(advanceS3Card())return}if(cur===5&&flipActive&&flipIdx<3){const f=document.getElementById('flip'+flipIdx);if(f)f.classList.add('flipped');flipIdx++;if(flipIdx>=3)flipActive=false;return}goTo(cur+1)}
+  if(['ArrowLeft','ArrowUp'].includes(e.code)){e.preventDefault();goTo(cur-1)}
+});
+document.addEventListener('click',e=>{
+  if(e.target.closest('.nd'))return;
+  if(cur===0&&s0p===0){bloomS0();return}
+  goTo(cur+1);
+});
+
+// S0
+function initS0(){s0p=0;const you=document.getElementById('s0-you');document.getElementById('s0-l1').innerHTML='';document.getElementById('s0-l2').innerHTML='';you.classList.remove('in','bloom');setTimeout(()=>you.classList.add('in'),400)}
+function bloomS0(){if(s0p!==0)return;s0p=1;document.getElementById('s0-you').classList.add('bloom');const L1=['Behind','every','deal','you','close'],L2=['There','is','a','world','you','may','not','see.'];function bl(el,words,base,goldLast){el.innerHTML='';words.forEach((w,i)=>{const s=document.createElement('span');s.className='hw';if(goldLast&&i===words.length-1){s.innerHTML='<em style="color:#E6BC4A;font-style:normal">'+w+'</em>\u00A0'}else{s.textContent=w+'\u00A0'}el.appendChild(s);setTimeout(()=>s.classList.add('in'),base+i*85)})}bl(document.getElementById('s0-l1'),L1,300,false);bl(document.getElementById('s0-l2'),L2,300+L1.length*85+200,true)}
+
+// S1 TIMELINE
+const TLN=[{label:'PROSPECT',x:80},{label:'QUALIFY',x:240},{label:'DEMO',x:400},{label:'PROPOSE',x:560},{label:'NEGOTIATE',x:720},{label:'CLOSE',x:880}];
+const TLC=['#0068AC','#0079c1','#088697','#4a9e6a','#a8a020','#E6BC4A'];
+function initS1(){
+  const g=document.getElementById('tl-nodes'),prog=document.getElementById('tl-prog');
+  g.innerHTML='';prog.setAttribute('x2','80');
+  const ns=document.createElementNS.bind(document,'http://www.w3.org/2000/svg');
+  TLN.forEach((node,i)=>{
+    const grp=ns('g');grp.style.opacity='0';grp.style.transition='opacity .4s ease';
+    const isC=node.label==='CLOSE';
+    if(isC){[36,27].forEach((r,ri)=>{const c=ns('circle');c.setAttribute('cx',node.x);c.setAttribute('cy','60');c.setAttribute('r',r);c.setAttribute('fill','none');c.setAttribute('stroke',`rgba(230,188,74,${ri===0?.15:.28})`);c.setAttribute('stroke-width','1');grp.appendChild(c)})}
+    const c=ns('circle');c.setAttribute('cx',node.x);c.setAttribute('cy','60');c.setAttribute('r',isC?'18':'12');c.setAttribute('fill',TLC[i]);c.setAttribute('filter','url(#gf)');grp.appendChild(c);
+    const cd=ns('circle');cd.setAttribute('cx',node.x);cd.setAttribute('cy','60');cd.setAttribute('r',isC?'6.5':'4.2');cd.setAttribute('fill','rgba(255,255,255,.85)');grp.appendChild(cd);
+    const t=ns('text');t.setAttribute('x',node.x);t.setAttribute('y','95');t.setAttribute('text-anchor','middle');t.setAttribute('font-size',isC?'18':'16');t.setAttribute('font-weight',isC?'700':'600');t.setAttribute('font-family','Libre Franklin,sans-serif');t.setAttribute('letter-spacing','0.14em');t.setAttribute('fill',isC?'#E6BC4A':'rgba(255,255,255,.9)');t.textContent=node.label;grp.appendChild(t);
+    g.appendChild(grp);
+    setTimeout(()=>{grp.style.opacity='1';prog.setAttribute('x2',String(node.x));prog.style.transition=`x2 ${(i+1)*300+200}ms cubic-bezier(.4,0,.2,1)`},300+i*320);
+  });
+  setTimeout(()=>{
+    document.getElementById('tl-copy').classList.add('in');
+    startCopyHighlight();
+  },300+TLN.length*320+400);
+  // Start pulsing loop after initial build
+  setTimeout(()=>startTLPulse(),300+TLN.length*320+600);
+}
+
+let tlCopyTimer1=null,tlCopyTimer2=null;
+function startCopyHighlight(){
+  clearTimeout(tlCopyTimer1);clearTimeout(tlCopyTimer2);
+  const s1=document.getElementById('tl-sent1');
+  const s2=document.getElementById('tl-sent2');
+  if(!s1||!s2)return;
+  // Phase 1: first two sentences bright, second dim — hold 10s
+  s1.className='bright';
+  s2.className='dim';
+  // Phase 2: after 10s, swap — second bright, first dim — hold 15s
+  tlCopyTimer1=setTimeout(()=>{
+    s1.className='dim';
+    s2.className='bright';
+  },10000);
+  // Phase 3: after 25s total, reset both to neutral
+  tlCopyTimer2=setTimeout(()=>{
+    s1.className='';
+    s2.className='';
+  },25000);
+}
+let tlPulseTimer=null;
+function startTLPulse(){
+  clearTimeout(tlPulseTimer);
+  const nodes=document.querySelectorAll('#tl-nodes > g');
+  if(!nodes.length)return;
+  let idx=0;
+  function pulseNext(){
+    // Dim all nodes
+    nodes.forEach((n,i)=>{
+      const circles=n.querySelectorAll('circle');
+      circles.forEach(c=>{
+        const oldFill=c.getAttribute('fill');
+        if(oldFill&&oldFill!=='none') c.setAttribute('opacity','0.35');
+      });
+      const texts=n.querySelectorAll('text');
+      texts.forEach(t=>t.setAttribute('opacity','0.3'));
+    });
+    // Highlight current node — full brightness
+    const node=nodes[idx];
+    const circles=node.querySelectorAll('circle');
+    circles.forEach(c=>{
+      const oldFill=c.getAttribute('fill');
+      if(oldFill&&oldFill!=='none') c.setAttribute('opacity','1');
+    });
+    const texts=node.querySelectorAll('text');
+    texts.forEach(t=>t.setAttribute('opacity','1'));
+    const isLast=idx===nodes.length-1;
+    const holdTime=isLast?5000:2000;
+    idx++;
+    if(idx>=nodes.length)idx=0;
+    tlPulseTimer=setTimeout(pulseNext,holdTime);
+  }
+  pulseNext();
+}
+
+// S2
+function initS2(){
+  const canvas=document.getElementById('uni-canvas');canvas.width=innerWidth;canvas.height=innerHeight;
+  const ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height;
+  const BC=[[8,134,151],[0,104,172],[240,118,35],[184,43,30],[230,188,74]];
+  const dots=[];for(let i=0;i<380;i++){const br=BC[i%5],a=Math.random()*Math.PI*2,d=60+Math.random()*Math.min(W,H)*.5;dots.push({x:W/2+Math.cos(a)*d,y:H/2+Math.sin(a)*d,r:.6+Math.random()*2.4,color:br,op:0,tgt:.15+Math.random()*.65,delay:Math.random()*2200,pulse:Math.random()*Math.PI*2,spd:.002+Math.random()*.004})}
+  let st=null;function drawU(ts){if(!st)st=ts;const el=ts-st;ctx.clearRect(0,0,W,H);dots.forEach(d=>{if(el>d.delay)d.op=Math.min(d.op+.007,d.tgt);const p=d.op*(0.65+0.35*Math.sin(ts*d.spd+d.pulse));const[R,G,B]=d.color;ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fillStyle=`rgba(${R},${G},${B},${p})`;ctx.fill()});requestAnimationFrame(drawU)}
+  requestAnimationFrame(drawU);
+  ['sc0','sc1','sc2'].forEach((id,i)=>{const el=document.getElementById(id);if(el){el.classList.remove('in');setTimeout(()=>el.classList.add('in'),600+i*500)}});
+  ['sv1','sv2'].forEach((id,i)=>{const el=document.getElementById(id);if(el)setTimeout(()=>el.classList.add('in'),900+i*500)});
+  setTimeout(()=>document.getElementById('s2-sub').classList.add('in'),600+3*500+300);
+}
+
+// S3/S4
+function initLife(n){const el=document.getElementById('s'+n);el.querySelectorAll('.ecard').forEach((c,i)=>{c.classList.remove('in');setTimeout(()=>c.classList.add('in'),420+i*130)});el.querySelectorAll('.lens-flip').forEach((c,i)=>{c.classList.remove('in');setTimeout(()=>c.classList.add('in'),400+i*180)})}
+
+// S5
+// STACKED CARDS — S3
+let s3CardIdx=0,s3Active=false;
+function initS3Cards(){
+  s3CardIdx=0;s3Active=true;
+  const cards=['s3c0','s3c1','s3c2','s3c3'];
+  cards.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.classList.remove('in','stack-active','stack-behind');}
+  });
+  // Show first card after delay
+  setTimeout(()=>{
+    const first=document.getElementById('s3c0');
+    if(first){first.classList.add('in','stack-active');}
+    // Show rest as behind
+    ['s3c1','s3c2','s3c3'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el){el.classList.add('in','stack-behind');}
+    });
+  },500);
+}
+function advanceS3Card(){
+  const cards=['s3c0','s3c1','s3c2','s3c3'];
+  // Move current to behind
+  const cur=document.getElementById(cards[s3CardIdx]);
+  if(cur){cur.classList.remove('stack-active');cur.classList.add('stack-behind');}
+  s3CardIdx++;
+  if(s3CardIdx>=cards.length){s3Active=false;return false;}
+  // Bring next forward
+  const next=document.getElementById(cards[s3CardIdx]);
+  if(next){next.classList.remove('stack-behind');next.classList.add('stack-active');}
+  return true;
+}
+
+// FLIP CARDS — S5
+let flipIdx=0,flipActive=false;
+function initFlips(){
+  flipIdx=0;flipActive=true;
+  ['flip0','flip1','flip2'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el){el.classList.remove('flipped');el.classList.remove('in');
+      setTimeout(()=>el.classList.add('in'),400+i*200);
+    }
+  });
+}
+
+const HSTOPS=[0,268,588,930];let hb=0;
+function initS5(){hb=0;document.getElementById('hub-inner').style.top='0px';const hl=document.getElementById('s5-headline'),hs=document.getElementById('s5-sub'),hw=document.getElementById('hub-win');hl.classList.remove('in');hs.classList.remove('in');hw.classList.remove('in');setTimeout(()=>hl.classList.add('in'),200);setTimeout(()=>hs.classList.add('in'),400);setTimeout(()=>hw.classList.add('in'),600);clearInterval(hubTimer);hubTimer=setInterval(()=>{hb=(hb+1)%HSTOPS.length;document.getElementById('hub-inner').style.top=(-HSTOPS[hb])+'px'},4800)}
+
+// S6
+function initS6(){
+  ['princ0','princ1','princ2'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el){el.classList.remove('in');setTimeout(()=>el.classList.add('in'),400+i*220);}
+  });
+}
+
+// S7
+function initS7(){
+  const l1=document.getElementById('cl1'),l2=document.getElementById('cl2'),r=document.getElementById('cl-rule'),n=document.getElementById('cl-names');
+  [l1,l2,r,n].forEach(e=>e.classList.remove('in'));
+  setTimeout(()=>l1.classList.add('in'),300);setTimeout(()=>l2.classList.add('in'),1000);setTimeout(()=>r.classList.add('in'),1800);
+  setTimeout(()=>{n.classList.add('in');setTimeout(startGlow,900)},2200);
+}
+function startGlow(){
+  clearInterval(glowTimer);const ns=document.querySelectorAll('#cl-names .cn');if(!ns.length)return;
+  let idx=0;function gn(){ns.forEach(n=>n.classList.remove('glow'));ns[idx].classList.add('glow');idx=(idx+1)%ns.length}
+  gn();glowTimer=setInterval(gn,600);
+}
+</script>
+</body>
+</html>
